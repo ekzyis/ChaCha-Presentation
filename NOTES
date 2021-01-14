@@ -1,0 +1,12 @@
+### AES vs. ChaCha
+
+##### Security
+
+- AES ist anfällig für Side-Channel Attacks (genauer: Timing Attacks)
+- Grund: AES benutzt Lookup-Tabellen, deren Zugriff abhängig vom Schlüssel ist.
+  Aufgrund Caching von Seiten der CPU kann ein Angreifer herausfinden, auf welche Einträge zugegriffen wurden
+  und somit Rückschlüsse auf den Schlüssel ziehen.
+- ChaCha dagegen benutzt nur ARX Operationen. Diese besitzen eine konstante Laufzeit.
+
+##### Speed
+- AES ohne Hardwarebeschleunigung ist langsamer als ChaCha

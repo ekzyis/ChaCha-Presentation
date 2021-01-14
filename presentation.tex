@@ -56,8 +56,8 @@
 
 \section{Einleitung}
 
-\subsection{Was ist CrypTool 2?}
-\begin{frame}{Was ist CrypTool 2?}
+\subsection{CrypTool 2}
+\begin{frame}{CrypTool 2}
 \begin{figure}
 \center
 \begin{minipage}{.5\textwidth}
@@ -73,8 +73,16 @@
 \end{itemize}
 \end{frame}
 
-\subsection{Warum ChaCha?}
-\begin{frame}{Warum ChaCha?}
+\subsection{ChaCha}
+\begin{frame}{ChaCha}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\begin{itemize}
+\item 256-bit Stromchiffre
+\item veröffentlicht in 2008 von Daniel J. Bernstein
+\item basiert auf Salsa20 des gleichen Authors
+\item wird seit 2014 im Transport Layer Security Protokoll (TLS) \\eingesetzt aufgrund besserer Geschwindigkeit\footnotemark und Sicherheit gegenüber AES-GCM\\ \Rightarrow\ sehr relevant für moderne Kryptographie
+\end{itemize}
+\footnotetext[1]{in Software-Implementierungen}
 \end{frame}
 
 \section{Ziele des Plug-ins}
