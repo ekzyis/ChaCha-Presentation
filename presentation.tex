@@ -20,6 +20,15 @@
 
 \usepackage[font=tiny]{caption}
 
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows,matrix,positioning}
+
+\newcommand{\tikzmark}[2]{
+    \tikz[overlay,remember picture,baseline]
+    \node[anchor=base] (#1) {$#2$};
+}
+
 \title[Impl. and Visualization of the ChaCha Cipher Family in CT2]{Implementation and Didactical Visualization of the ChaCha Cipher Family in CrypTool 2}
 \author{Ramdip Gill}
 \institute{University of Heidelberg}
@@ -169,6 +178,26 @@ Zähler (64-bit): \\
 
 \subsection{Quarterround-Funktion}
 \begin{frame}{Quarterround-Funktion}
+\begin{itemize}
+\item modifiziert vier 32-bit Matrixeinträge
+\item pro Runde: vier Aufrufe der Quarterround-Funktion \\
+$\Rightarrow$ nach jeder Runde wurden alle Matrixeinträge modifiziert
+\item Runden werden aufgeteilt in \textit{Spalten-} und \textit{Diagonalrunden}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Spaltenrunden}
+\begin{equation*}
+\begin{pmatrix}
+y_0& y_1 & y_2 & y_3 \\
+y_4& y_5 & y_6 & y_7 \\
+y_8 & y_9 & y_{10} & y_{11} \\
+y_{12} & y_{13} & y_{14} & y_{15} \\
+\end{pmatrix}
+\end{equation*}
+\end{frame}
+
+\begin{frame}{Diagonalrunden}
 \end{frame}
 
 \subsection{Hashfunktion}
