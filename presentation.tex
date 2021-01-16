@@ -43,6 +43,8 @@
   \vskip0pt%
 }
 
+\urlstyle{same}
+
 \begin{document}
 
 \begin{frame}[plain]
@@ -99,6 +101,24 @@
 
 \section{ChaCha Spezifikation}
 \begin{frame}{ChaCha Spezifikation}
+
+\begin{center}
+\parbox{0.8\textwidth}{
+\textbf{Abstract.} ChaCha8 is a 256-bit stream cipher based on the 8-round
+cipher Salsa20/8. The changes from Salsa20/8 to ChaCha8 are designed
+to improve diffusion per round, conjecturally increasing resistance to
+cryptanalysis, while preserving—and often improving—time per round. [...]
+\vspace{-0.75em}
+\begin{flushright}
+-- Daniel J. Bernstein
+\end{flushright}
+}
+\end{center}
+\begin{itemize}
+\item Quelle: \url{https://cr.yp.to/chacha/chacha-20080120.pdf}
+\item erläutert lediglich Unterschiede zu Salsa20
+\item Unterschiede: Zustandsmatrix-Aufbau und Quarterround-Funktion
+\end{itemize}
 \end{frame}
 
 \subsection{Quarterround-Funktion}
