@@ -123,6 +123,48 @@ cryptanalysis, while preserving—and often improving—time per round. [...]
 
 \subsection{Aufbau der Zustandsmatrix}
 \begin{frame}{Aufbau der Zustandsmatrix}
+\begin{equation*}
+\begin{pmatrix}
+\texttt{CONSTANT}& \texttt{CONSTANT} & \texttt{CONSTANT} & \texttt{CONSTANT} \\
+\texttt{KEY} & \texttt{KEY} & \texttt{KEY} & \texttt{KEY} \\
+\texttt{KEY} & \texttt{KEY} & \texttt{KEY} & \texttt{KEY} \\
+\texttt{COUNTER} & \texttt{COUNTER} & \texttt{IV} & \texttt{IV} \\
+\end{pmatrix}
+\end{equation*}
+\begin{itemize}
+\item 32-bit pro Eintrag (insgesamt: 512-bit)
+\item Konstanten abhängig von Schlüssellänge
+\begin{itemize}
+\item 128-bit Schlüssel: ``expand 16-byte k'' (ASCII) \\
+$\Rightarrow$ \texttt{65:78:70:61 6e:64:20:31 36:2d:62:79 74:65:20:6b} (hex)
+\item 256-bit Schlüssel: ``expand 32-byte k'' (ASCII) \\
+$\Rightarrow$ \texttt{65:78:70:61 6e:64:20:33 32:2d:62:79 74:65:20:6b} (hex)
+\end{itemize}
+\item 128-bit Schlüssel werden konkateniert mit sich selbst
+\item Bytereihenfolge aller 32-bit Blöcke wird umgekehrt
+\item Zähler: Bytereihenfolge wird zusätzlich erst komplett umgedreht
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Aufbau der Zustandsmatrix - Beispiel}
+Schlüssel (256-bit): \\
+\hspace{1em} \texttt{01:02:03:04 05:06:07:08 09:0a:0b:0c 0d:0e:0f:10} \\
+\hspace{1em} \texttt{11:12:13:14 15:16:17:18 19:1a:1b:1c 1d:1e:1f:20} \\
+$\Rightarrow$ Konstanten (128-bit): \\
+\hspace{1em} \texttt{65:78:70:61 6e:64:20:33 32:2d:62:79 74:65:20:6b} \\
+Initialisierungsvektor (64-bit): \\
+\hspace{1em} \texttt{00:11:22:33 44:55:66:77} \\
+Zähler (64-bit): \\
+\hspace{1em} \texttt{00:00:00:00 00:00:00:01} \\
+\vspace{1em} $\Rightarrow$ Zustandsmatrix:
+\begin{equation*}
+\begin{pmatrix}
+\texttt{61:70:78:65}& \texttt{33:20:64:6e} & \texttt{79:62:2d:32} & \texttt{6b:20:65:74} \\
+\texttt{04:03:02:01} & \texttt{08:07:06:05} & \texttt{0c:0b:0a:09} & \texttt{10:0f:0e:0d} \\
+\texttt{14:13:12:11} & \texttt{18:17:16:15} & \texttt{1c:1b:1a:19} & \texttt{20:1f:1e:1d} \\
+\texttt{00:00:00:01} & \texttt{00:00:00:00} & \texttt{33:22:11:00} & \texttt{77:66:55:44} \\
+\end{pmatrix}
+\end{equation*}
 \end{frame}
 
 \subsection{Quarterround-Funktion}
