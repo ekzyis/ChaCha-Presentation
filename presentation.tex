@@ -287,6 +287,30 @@ y_{12} & y_{13} & \tikzmark{14}{y_{14}} & y_{15} \\
 
 \subsection{Hashfunktion}
 \begin{frame}{Hashfunktion}
+\begin{center}
+\begin{minipage}{\linewidth}
+\scriptsize
+\texttt{chachahash(y):} \\
+\hspace*{2em}\texttt{z = copy(y)}\\
+\hspace*{2em}\texttt{for(i = 0; i < ROUNDS; i += 2) \{}\\
+\hspace*{4em}\texttt{// column round}\\
+\hspace*{4em}\texttt{y[0], y[4], y[8], \ y[12] = quarterround(y[0], y[4], y[8], \  y[12])}\\
+\hspace*{4em}\texttt{y[1], y[5], y[9], \ y[13] = quarterround(y[1], y[5], y[9], \  y[13])}\\
+\hspace*{4em}\texttt{y[2], y[6], y[10], y[14] = quarterround(y[2], y[6], y[10], y[14])}\\
+\hspace*{4em}\texttt{y[3], y[7], y[11], y[15] = quarterround(y[3], y[7], y[11], y[15])}\\
+\hspace*{4em}\texttt{// diagonal round}\\
+\hspace*{4em}\texttt{y[0], y[5], y[10], y[15] = quarterround(y[0], y[5], y[10], y[15])}\\
+\hspace*{4em}\texttt{y[1], y[6], y[11], y[12] = quarterround(y[0], y[5], y[10], y[15])}\\
+\hspace*{4em}\texttt{y[2], y[7], y[8], \  y[13] = quarterround(y[0], y[5], y[10], y[15])}\\
+\hspace*{4em}\texttt{y[3], y[4], y[9], \  y[14] = quarterround(y[0], y[5], y[10], y[15])}\\
+\hspace*{2em}\texttt{\}}\\
+\hspace*{2em}\texttt{for(i = 0; i < 16; i += 1) \{}\\
+\hspace*{4em}\texttt{y[i] += z[i]}\\
+\hspace*{4em}\texttt{y[i] = littleendian(y[i])}  // reverse byte order\\
+\hspace*{2em}\texttt{\}}\\
+\hspace*{2em}\texttt{return y}
+\end{minipage}
+\end{center}
 \end{frame}
 
 \section{Live-Präsentation des Plug-ins}
