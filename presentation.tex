@@ -177,7 +177,17 @@ Zähler (64-bit): \\
 \end{frame}
 
 \subsection{Quarterround-Funktion}
-\begin{frame}{Quarterround-Funktion}
+\begin{frame}[fragile]{Quarterround-Funktion}
+\begin{center}
+\begin{minipage}{0.5\linewidth}
+\texttt{quarterround(a,b,c,d):} \\
+\hspace*{2em}\texttt{a += b; d  \^{}= a; d} \verb|<<<|\texttt{= 16} \\
+\hspace*{2em}\texttt{c += d; b \^{}= c; b} \verb|<<<|\texttt{= 12} \\
+\hspace*{2em}\texttt{a += b; d \^{}= a; d} \verb|<<<|\texttt{= 8} \\
+\hspace*{2em}\texttt{c += d; b \^{}= c; b} \verb|<<<|\texttt{= 7} \\
+\hspace*{2em}\texttt{return a, b, c, d}
+\end{minipage}
+\end{center}
 \begin{itemize}
 \item modifiziert vier 32-bit Matrixeinträge
 \item pro Runde: vier Aufrufe der Quarterround-Funktion \\
