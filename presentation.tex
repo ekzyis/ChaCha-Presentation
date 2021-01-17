@@ -22,11 +22,11 @@
 
 \usepackage{amsmath}
 \usepackage{tikz}
-\usetikzlibrary{arrows,matrix,positioning}
+\usepackage{mathtools}
 
 \newcommand{\tikzmark}[2]{
     \tikz[overlay,remember picture,baseline]
-    \node[anchor=base] (#1) {$#2$};
+    \node[anchor=base] (#1){$#2$};
 }
 
 \title[Impl. and Visualization of the ChaCha Cipher Family in CT2]{Implementation and Didactical Visualization of the ChaCha Cipher Family in CrypTool 2}
@@ -189,15 +189,90 @@ $\Rightarrow$ nach jeder Runde wurden alle Matrixeinträge modifiziert
 \begin{frame}{Spaltenrunden}
 \begin{equation*}
 \begin{pmatrix}
-y_0& y_1 & y_2 & y_3 \\
-y_4& y_5 & y_6 & y_7 \\
+\hspace{0.2em}\tikzmark{0}{y_0} & y_1 & y_2 & y_3 \\
+\hspace{0.2em}y_4 &y_5 & y_6 & y_7 \\
+\hspace{0.2em}y_8 & y_9 & y_{10} & y_{11} \\
+\hspace{0.2em}\tikzmark{12}{y_{12}} & y_{13} & y_{14} & y_{15} \\
+\end{pmatrix}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (0.center) -- (12.center);
+\end{tikzpicture}
+\begin{pmatrix}
+y_0 & \tikzmark{1}{y_1} & y_2 & y_3 \\
+y_4 &y_5 & y_6 & y_7 \\
 y_8 & y_9 & y_{10} & y_{11} \\
-y_{12} & y_{13} & y_{14} & y_{15} \\
+y_{12} & \tikzmark{13}{y_{13}} & y_{14} & y_{15} \\
+\end{pmatrix}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (1.center) -- (13.center);
+\end{tikzpicture}
+\end{equation*}
+\begin{equation*}
+\begin{pmatrix}
+y_0 & y_1 & \tikzmark{2}{y_2} & y_3 \\
+y_4 &y_5 & y_6 & y_7 \\
+y_8 & y_9 & y_{10} & y_{11} \\
+y_{12} & y_{13} & \tikzmark{14}{y_{14}} & y_{15} \\
+\end{pmatrix}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (2.center) -- (14.center);
+\end{tikzpicture}
+\begin{pmatrix}
+y_0 & y_1 & y_2 & \tikzmark{3}{y_3} \\
+y_4 &y_5 & y_6 & y_7 \\
+y_8 & y_9 & y_{10} & y_{11} \\
+y_{12} & y_{13} & y_{14} & \tikzmark{15}{y_{15}} \\
 \end{pmatrix}
 \end{equation*}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (3.center) -- (15.center);
+\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Diagonalrunden}
+\begin{equation*}
+\begin{pmatrix}
+\tikzmark{0}{y_0} & y_1 & y_2 & y_3 \\
+y_4 &y_5 & y_6 & y_7 \\
+y_8 & y_9 & y_{10} & y_{11} \\
+y_{12} & y_{13} & y_{14} & \tikzmark{15}{y_{15}} \\
+\end{pmatrix}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (0.center) -- (15.center);
+\end{tikzpicture}
+\begin{pmatrix}
+\hspace{0.2em}y_0 & \tikzmark{1}{y_1} & y_2 & y_3 \\
+\hspace{0.2em}y_4 &y_5 & y_6 & y_7 \\
+\hspace{0.2em}y_8 & y_9 & y_{10} & \tikzmark{11}{y_{11}} \\
+\hspace{0.2em}\tikzmark{12}{y_{12}} & y_{13} & y_{14} & y_{15} \\
+\end{pmatrix}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (1.center) -- (11.center);
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (12.center) -- (12.center);
+\end{tikzpicture}
+\end{equation*}
+\begin{equation*}
+\begin{pmatrix}
+y_0 & y_1 & \tikzmark{2}{y_2} & y_3 \\
+y_4 &y_5 & y_6 & \tikzmark{7}{y_7} \\
+\tikzmark{8}{y_8} & y_9 & y_{10} & y_{11} \\
+y_{12} & \tikzmark{13}{y_{13}} & y_{14} & y_{15} \\
+\end{pmatrix}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (2.center) -- (7.center);
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (8.center) -- (13.center);
+\end{tikzpicture}
+\begin{pmatrix}
+y_0 & y_1 & y_2 & \tikzmark{3}{y_3} \\
+\tikzmark{4}{y_4} &y_5 & y_6 & y_7 \\
+y_8 & \tikzmark{9}{y_9} & y_{10} & y_{11} \\
+y_{12} & y_{13} & \tikzmark{14}{y_{14}} & y_{15} \\
+\end{pmatrix}
+\end{equation*}
+\begin{tikzpicture}[overlay,remember picture]
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (3.center) -- (3.center);
+     \draw[opacity=.2,line width=3mm,line cap=round,color=green] (4.center) -- (14.center);
+\end{tikzpicture}
 \end{frame}
 
 \subsection{Hashfunktion}
