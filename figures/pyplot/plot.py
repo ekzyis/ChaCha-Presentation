@@ -7,7 +7,7 @@ import numpy as np
 MAX_X = 25
 
 font = {'family': 'normal',
-        'size': 36}
+        'size': 24}
 
 matplotlib.rc('font', **font)
 
@@ -26,7 +26,7 @@ def create_transition_plot():
     ax.plot(x, [0] + [2 * x * (x - 1) for x in np.arange(2, MAX_X, 1)])
     ax.plot(x[:20], [2 ** x for x in np.arange(0, 20, 1)])
     ax.plot(np.arange(1, ))
-    ax.legend(['$x^{2}$', 'Naiver Ansatz: $x(x-1)$', '$2^{x}$'])
+    ax.legend(['$x^{2}$', 'Naiver Ansatz: $2x(x-1)$', '$2^{x}$'])
     ax.set(xlabel='Seitenzustände', ylabel='Übergänge')
     plt.ylim((0, 2000))
     plt.show()
