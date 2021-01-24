@@ -136,8 +136,8 @@ cryptanalysis, while preserving—and often improving—time per round. [...]
 \end{itemize}
 \end{frame}
 
-\subsection{Aufbau der Zustandsmatrix in ChaCha}
-\begin{frame}{Aufbau der Zustandsmatrix in ChaCha}
+\subsection{Aufbau der Zustandsmatrix}
+\begin{frame}{Aufbau der Zustandsmatrix (ChaCha)}
 \begin{equation*}
 \begin{pmatrix}
 \texttt{CONSTANT}& \texttt{CONSTANT} & \texttt{CONSTANT} & \texttt{CONSTANT} \\
@@ -161,10 +161,10 @@ $\Rightarrow$ \texttt{65:78:70:61 6e:64:20:33 32:2d:62:79 74:65:20:6b} (hex)
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Aufbau der Zustandsmatrix - Beispiel}
+\begin{frame}{Aufbau der Zustandsmatrix -- Beispiel}
 Schlüssel (256-bit): \\
-\hspace{1em} \texttt{01:02:03:04 05:06:07:08 09:0a:0b:0c 0d:0e:0f:10} \\
-\hspace{1em} \texttt{11:12:13:14 15:16:17:18 19:1a:1b:1c 1d:1e:1f:20} \\
+\hspace{1em} \texttt{00:01:02:03 04:05:06:07 08:09:0a:0b 0c:0d:0e:0f} \\
+\hspace{1em} \texttt{10:11:12:13 14:15:16:17 18:19:1a:1b 1c:1d:1e:1f} \\
 $\Rightarrow$ Konstanten (128-bit): \\
 \hspace{1em} \texttt{65:78:70:61 6e:64:20:33 32:2d:62:79 74:65:20:6b} \\
 Initialisierungsvektor (64-bit): \\
@@ -175,11 +175,47 @@ Zähler (64-bit): \\
 \begin{equation*}
 \begin{pmatrix}
 \texttt{61:70:78:65}& \texttt{33:20:64:6e} & \texttt{79:62:2d:32} & \texttt{6b:20:65:74} \\
-\texttt{04:03:02:01} & \texttt{08:07:06:05} & \texttt{0c:0b:0a:09} & \texttt{10:0f:0e:0d} \\
-\texttt{14:13:12:11} & \texttt{18:17:16:15} & \texttt{1c:1b:1a:19} & \texttt{20:1f:1e:1d} \\
+\texttt{03:02:01:00} & \texttt{07:06:05:04} & \texttt{0b:0a:09:08} & \texttt{0f:0e:0d:0c} \\
+\texttt{13:12:11:10} & \texttt{17:16:15:14} & \texttt{1b:1a:19:18} & \texttt{1f:1e:1d:1c} \\
 \texttt{00:00:00:01} & \texttt{00:00:00:00} & \texttt{33:22:11:00} & \texttt{77:66:55:44} \\
 \end{pmatrix}
 \end{equation*}
+\end{frame}
+
+\begin{frame}{Aufbau der Zustandsmatrix -- Plugin}
+\begin{figure}
+\center
+\begin{minipage}{\textwidth}
+\includegraphics[width=\textwidth]{figures/state-matrix/1-state-matrix-constants.png}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Aufbau der Zustandsmatrix -- Plugin}
+\begin{figure}
+\center
+\begin{minipage}{\textwidth}
+\includegraphics[width=\textwidth]{figures/state-matrix/2-state-matrix-key.png}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Aufbau der Zustandsmatrix -- Plugin}
+\begin{figure}
+\center
+\begin{minipage}{\textwidth}
+\includegraphics[width=\textwidth]{figures/state-matrix/3-state-matrix-counter.png}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Aufbau der Zustandsmatrix -- Plugin}
+\begin{figure}
+\center
+\begin{minipage}{\textwidth}
+\includegraphics[width=\textwidth]{figures/state-matrix/4-state-matrix-iv.png}
+\end{minipage}
+\end{figure}
 \end{frame}
 
 \subsection{Quarterround-Funktion}
@@ -202,7 +238,7 @@ $\Rightarrow$ nach jeder Runde wurden alle Matrixeinträge modifiziert
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Spaltenrunden}
+\begin{frame}{Quarterround-Funktion -- Spaltenrunde}
 \begin{equation*}
 \begin{pmatrix}
 \hspace{0.2em}\tikzmark{0}{y_0} & y_1 & y_2 & y_3 \\
@@ -245,7 +281,7 @@ y_{12} & y_{13} & y_{14} & \tikzmark{15}{y_{15}} \\
 \end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Diagonalrunden}
+\begin{frame}{Quarterround-Funktion -- Diagonalrunde}
 \begin{equation*}
 \begin{pmatrix}
 \tikzmark{0}{y_0} & y_1 & y_2 & y_3 \\
@@ -319,6 +355,24 @@ y_{12} & y_{13} & \tikzmark{14}{y_{14}} & y_{15} \\
 \end{center}
 \end{frame}
 
+\begin{frame}{Hashfunktion -- Plugin}
+\begin{figure}
+\center
+\begin{minipage}{\textwidth}
+\includegraphics[width=\textwidth]{figures/chachahash/chachahash-mid-qr.png}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Hashfunktion -- Plugin}
+\begin{figure}
+\center
+\begin{minipage}{\textwidth}
+\includegraphics[width=\textwidth]{figures/chachahash/chachahash-end.png}
+\end{minipage}
+\end{figure}
+\end{frame}
+
 \section{Live-Präsentation des Plug-ins}
 \begin{frame}{Live-Präsentation des Plug-ins}
 \begin{figure}
@@ -329,119 +383,57 @@ y_{12} & y_{13} & \tikzmark{14}{y_{14}} & y_{15} \\
 \end{figure}
 \end{frame}
 
-\section{Architektur}
-\begin{frame}{Architektur}
-\textbf{Problem:}\\
-\hspace{1em}%
-\begin{minipage}[c]{0.95\textwidth}
-\flushleft \textbf{Wie Übergänge zwischen Seitenzuständen implementieren?}
-\end{minipage}
-\end{frame}
-
-\begin{frame}{Navigation: Naiver Ansatz}
-Lösung: Jeden Übergang einzeln implementieren
-\begin{figure}
-\center
-\begin{minipage}{.6\textwidth}
-\includegraphics[width=\textwidth]{figures/navigationsystem-all-overview.png}
-\end{minipage}
-\caption{Naives Navigationssystem}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Navigation: Naiver Ansatz}
-\begin{figure}
-\center
-\begin{minipage}{\textwidth}
-\includegraphics[width=\textwidth]{figures/naive_transitions.png}
-\end{minipage}
-\end{figure}
-Problem:\\
-\hspace{1em}%
-\begin{minipage}[c]{0.95\textwidth}
-\flushleft Sehr aufwändig, da Übergang für jede Kombination an Seitenzuständen benötigt
-\end{minipage}
-\end{frame}
-
-\begin{frame}{Navigation: Linearer Ansatz}
-\begin{figure}
-\center
-\begin{minipage}{\textwidth}
-\includegraphics[width=\textwidth]{figures/navigationsystem-linear-overview.png}
-\end{minipage}
-\caption{Lineares Navigationssystem}
-\end{figure}
-Lösung: Nur benachbarte Übergänge implementieren\\
-$\Rightarrow$ intuitiv, da Benutzer das Navigationssystem auch eher linear wahrnimmt (Seitenzustände bauen aufeinander auf)\\
-$\Rightarrow$ Code vorheriger Seitenzustände muss nicht dupliziert werden\\
-$\Rightarrow$ Pro neuem Seitenzustand nur zwei neue Übergänge benötigt
-\end{frame}
-
-\begin{frame}{Navigation: Linearer Ansatz}
-\begin{figure}
-\center
-\begin{minipage}{\textwidth}
-\includegraphics[width=\textwidth]{figures/performance_linear.png}
-\end{minipage}
-\end{figure}
-Problem: Performance: Reaktionszeit von bis zu 40\,s (!)
-\end{frame}
-
-\begin{frame}{Navigation: Linearer Ansatz mit ``Caching''}
-\begin{figure}
-\center
-\begin{minipage}{\textwidth}
-\includegraphics[width=\textwidth]{figures/navigationsystem-cache-overview-2.png}
-\end{minipage}
-\caption{Lineares Navigationssystem mit ``Caching''}
-\end{figure}
-Lösung: Übergänge zu bestimmten Seitenzuständen implementieren \\
-\hspace{1em}(maximale Anzahl an benötigten Übergängen wird verringert)\\
-$\Rightarrow$ Reaktionszeit verringert auf maximal 1,5\,s
-\end{frame}
-
-\begin{frame}{Navigation: Linearer Ansatz mit ``Caching''}
-\begin{figure}
-\center
-\begin{minipage}{\textwidth}
-\includegraphics[width=\textwidth]{figures/performance_cache.png}
-\end{minipage}
-\end{figure}
-Problem: Performance inkonsistent und intransparent
-\end{frame}
-
-\begin{frame}{Navigation: Zentralisierter Ansatz}
-\begin{figure}
-\center
-\begin{minipage}{.5\textwidth}
-\includegraphics[width=\textwidth]{figures/navigationsystem-central-overview.png}
-\end{minipage}
-\caption{Zentralisiertes Navigationssystem}
-\end{figure}
-Lösung: Initialer Zustand als zentralisierter, ``Reset''-Zustand\\
-$\Rightarrow$ Reaktionszeit verringert auf konstant zwischen 2,5\,ms und 10\,ms \vspace{0.5em}\\
-Problem: \\
-\hspace{1em}Codeduplizierung in folgenden Zuständen, da Seitenzustände\\
-\hspace{1em}aufeinander aufbauen
-\end{frame}
-
-\begin{frame}{Übergänge als Sequenzen}
-\begin{figure}
-\center
-\begin{minipage}{.3\textwidth}
-\includegraphics[width=\textwidth]{figures/onion.png}
-\end{minipage}
-\caption{Implementierung der Konstanten-Kodierung-Sequenz}
-\end{figure}
-Lösung: Implementierung von Übergängen als \textit{Sequenzen}
+\section{Zusammenfassung}
+\begin{frame}{Zusammenfassung}
+Ziele wurden wie folgt erreicht:
 \begin{itemize}
-\item innerhalb einer Sequenz erben nachfolgende Übergänge automatisch Code vorheriger Übergänge
-\item Sequenzen können verschachtelt und zurückgesetzt werden
-\item Zurücksetzung führt dazu dass Code dieser Sequenz nicht mehr vererbt wird (Anwendungsbeispiel: Rundenende)
+\item Unterstützung für unterschiedliche Rundenanzahl sowie DJB- und IETF-Version
+\begin{itemize}
+\item entsprechende Optionen in den Plugin-Einstellungen
+\item Inputvalidierung
+\end{itemize}
+\item Unterstützung für unterschiedliche Schlüsselgrößen \\
+\begin{itemize}
+\item Inputvalidierung (128-bit und 256-bit Schlüssel sind valide)
+\item entsprechende Handhabung der Schlüsselgrößen entsprechend der Spezifikation
+\end{itemize}
+\item Visualisierung des Ver-/Entschlüsselungsprozesses \\
+\begin{itemize}
+\item Visualisierung des Aufbaus der Zustandsmatrix
+\item Visualisierung der ChaCha-Hashfunktion
+\end{itemize}
+\item Visualisierung der Diffusion
+\begin{itemize}
+\item Dedizierte Seite für DIffusionseinstellungen
+\item Zweitwerte werden untereinander angezeigt (Unterschiede rot markiert)
+\item Anzahl der geflippten Bits wird absolut und in Prozent angezeigt
+\end{itemize}
 \end{itemize}
 \end{frame}
 
-\section{Kolloquium}
+\begin{frame}{Zusammenfassung}
+Ziel ``Fokus auf Didaktik'' wurde wie folgt erreicht:
+\begin{itemize}
+\item enge Absprache mit Prof. Armknecht
+\begin{itemize}
+\item Diffusion: Möglichkeit, XOR explizit einzugeben und anzuzeigen
+\item Konstanten, Schlüssel, Initialisierungsvektor und Zähler sind farblich markiert
+\end{itemize}
+\item detaillierte und umfangreiche Visualisierung
+\begin{itemize}
+\item Kein Schritt wird übersprungen
+\item Visualisierung der Quarterround-Funktion als Schaltplan mit allen Zwischenwerten
+\item Texte beschreiben was passiert
+\end{itemize}
+\item Navigation
+\begin{itemize}
+\item Benutzer kann sich frei bewegen
+\item intuitives Navigationsinterface
+\item Durchnummerierung aller Schritte erleichert Kommunikation zwischen Student und Dozent
+\end{itemize}
+\end{itemize}
+\end{frame}
+
 \begin{frame}
 \begin{figure}
 \center
